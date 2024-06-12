@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShrinkURL - URL Shortener</title>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Include Tailwind CSS -->
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="container mx-auto p-3 bg-white rounded-lg shadow-lg border border-gray-300"> <!-- Added border -->
+        <h1 class="text-3xl mb-6 text-center">ShrinkURL - URL Shortener</h1>
+        <p class="mb-4">Paste the URL to be shortened:</p>
+        <form action="/shorten" method="post">
+            <label for="url" class="sr-only">Enter the URL here:</label>
+            <input type="url" id="url" name="url" placeholder="Enter the URL here" required class="block w-full px-4 py-2 mb-4 text-lg rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none">Shorten URL</button>
+        </form>
+        <p class="mt-4">ShrinkURL is a free tool to shorten URLs and generate short links.<br>
+        URL shortener allows to create a shortened link making it easy to share.</p>
+        {% if short_url %}
+        <div class="result mt-6">
+            <h2 class="text-xl mb-2">Shortened URL:</h2>
+            <a href="{{ short_url }}" class="block mb-2 text-blue-500">{{ short_url }}</a>
+            <button onclick="copyToClipboard('{{ short_url }}')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none">Copy Link</button>
+        </div>
+        {% endif %}
+        <p class="mt-4">Simple and fast URL shortener! ShrinkURL allows to shorten long links from Instagram, Facebook, YouTube, Twitter, Linked In, WhatsApp, TikTok, blogs and sites. Just paste the long URL and click the Shrink URL button. On the next page, copy the shortened URL and share it on sites, chat and emails. </p>
+    </div>
+    <script>
+        function copyToClipboard(text) {
+            var input = document.createElement('input');
+            input.setAttribute('value', text);
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            alert('Copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
